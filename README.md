@@ -1,4 +1,4 @@
-# setupkubernetes quickly installs kubernetes cluster on centos/redhat
+# setupkubernetes quickly installs kubernetes cluster on centos/redhat or ubuntu
 Instructions
 
 sudo yum -y install git or sudo apt-get -y install git
@@ -11,7 +11,9 @@ cd setupkubernetes
 
 ./runfirst.sh
 
-./master_centos.sh or ./slave_centos.sh
+./master_centos.sh or ./slave_centos.sh if it's centos/redhat
+
+./master_ubuntu.sh or ./slave_ubuntu.sh if it's ubuntu
 
 run sudo kubeadm join .... on the slave nodes
 
