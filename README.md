@@ -11,10 +11,10 @@ cd setupkubernetes
 
 ./runfirst.sh
 
-./master_centos.sh or ./slave_centos.sh if it's centos/redhat
+./master_centos.sh or ./workernode_centos.sh if it's centos/redhat
 
-./master_ubuntu.sh or ./slave_ubuntu.sh if it's ubuntu
+./master_ubuntu.sh or ./workernode_ubuntu.sh if it's ubuntu
 
-run sudo kubeadm join .... on the slave nodes
+run sudo kubeadm join .... on the worker nodes
 
 run kubectl get nodes on master
