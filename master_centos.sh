@@ -1,8 +1,8 @@
 #!/bin/bash
 sudo yum -y update
-sudo yum -y install wget nc bind-utils unzip yum-utils device-mapper-persistent-data lvm2
+sudo yum -y install wget nc bind-utils unzip yum-utils device-mapper-persistent-data lvm2 perl
 sudo swapoff -a
-sudo sed -i --follow-symlinks 's/\/root\/swap/#\/root\/swap/' /etc/fstab
+sudo perl -pi -e 's/\/root\/swap/#\/root\/swap/' /etc/fstab
 sudo yum -y install docker
 sudo systemctl enable docker
 sudo systemctl start docker
@@ -17,7 +17,7 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 EOF
 
 sudo setenforce 0
-sudo sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+sudo perl -pi -e 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 sudo yum install -y kubelet kubeadm kubectl
 sudo systemctl enable kubelet
 sudo systemctl start kubelet
@@ -26,7 +26,7 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sudo sysctl --system
-sudo sed -i --follow-symlinks 's/cgroup-driver=systemd/cgroup-driver=cgroupfs/g' /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+sudo perl -pi -e 's/cgroup-driver=systemd/cgroup-driver=cgroupfs/g' /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
 
 # Master node
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all
