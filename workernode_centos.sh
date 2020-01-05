@@ -3,7 +3,8 @@ sudo yum -y update
 sudo yum -y install wget nc bind-utils unzip yum-utils device-mapper-persistent-data lvm2 perl
 sudo swapoff -a
 sudo perl -pi -e 's/\/root\/swap/#\/root\/swap/' /etc/fstab
-sudo yum -y install docker
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum -y install docker-ce
 sudo systemctl enable docker
 sudo systemctl start docker
 cat << EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
