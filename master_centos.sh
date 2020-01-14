@@ -6,7 +6,7 @@ sudo perl -pi -e 's/\/root\/swap/#\/root\/swap/' /etc/fstab
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum -y install docker-ce
 sudo sed -i '/^ExecStart/ s/$/ --exec-opt native.cgroupdriver=systemd/' /usr/lib/systemd/system/docker.service
-systemctl daemon-reload
+sudo systemctl daemon-reload
 sudo systemctl enable docker
 sudo systemctl start docker
 cat << EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
