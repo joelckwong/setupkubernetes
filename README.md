@@ -17,4 +17,4 @@ cd setupkubernetes
 
 run sudo kubeadm join .... on the worker nodes
 
-run kubectl get nodes on master
+run "kubectl get pods --all-namespaces" and "kubectl get nodes" on master
