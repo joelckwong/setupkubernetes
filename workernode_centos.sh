@@ -5,6 +5,8 @@ sudo swapoff -a
 sudo perl -pi -e 's/\/root\/swap/#\/root\/swap/' /etc/fstab
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum -y install docker-ce
+sudo sed -i '/^ExecStart/ s/$/ --exec-opt native.cgroupdriver=systemd/' /usr/lib/systemd/system/docker.service
+sudo systemctl daemon-reload
 sudo systemctl enable docker
 sudo systemctl start docker
 cat << EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
@@ -27,4 +29,3 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sudo sysctl --system
-sudo perl -pi -e 's/cgroup-driver=systemd/cgroup-driver=cgroupfs/g' /usr/lib/systemd/system/kubelet.service.d/10-kubeadm.conf
