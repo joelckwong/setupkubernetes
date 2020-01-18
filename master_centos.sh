@@ -1,8 +1,8 @@
 #!/bin/bash
 sudo yum -y update
-sudo yum -y install wget nc bind-utils unzip yum-utils device-mapper-persistent-data lvm2 perl
+sudo yum -y install wget nc bind-utils unzip yum-utils device-mapper-persistent-data lvm2
 sudo swapoff -a
-sudo perl -pi -e 's/\/root\/swap/#\/root\/swap/' /etc/fstab
+sudo sed -i 's/^[^#]*swap/#&/' /etc/fstab
 sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo yum -y install docker-ce
 sudo sed -i '/^ExecStart/ s/$/ --exec-opt native.cgroupdriver=systemd/' /usr/lib/systemd/system/docker.service
@@ -20,7 +20,7 @@ gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cl
 EOF
 
 sudo setenforce 0
-sudo perl -pi -e 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+sudo sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 sudo yum install -y kubelet kubeadm kubectl
 sudo systemctl enable kubelet
 sudo systemctl start kubelet
