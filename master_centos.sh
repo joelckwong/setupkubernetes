@@ -29,6 +29,10 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sudo sysctl --system
+sudo firewall-cmd --zone=public --add-port=6443/tcp --permanent
+sudo firewall-cmd --zone=public --add-port=10250/tcp --permanent
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-ports
 
 # Master node
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all
