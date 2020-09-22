@@ -29,6 +29,11 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sudo sysctl --system
-sudo firewall-cmd --zone=public --add-port=10250/tcp --permanent
+sudo firewall-cmd --permanent --add-port=10250/tcp
+sudo firewall-cmd --permanent --add-port=8285/udp # Flannel
+sudo firewall-cmd --permanent --add-port=8472/udp # Flannel
+sudo firewall-cmd --permanent --add-port=30000-32767/tcp
+sudo firewall-cmd --add-masquerade --permanent
 sudo firewall-cmd --reload
+sudo systemctl restart firewalld
 sudo firewall-cmd --list-ports
