@@ -29,3 +29,6 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
 sudo sysctl --system
+sudo firewall-cmd --zone=public --add-port=10250/tcp --permanent
+sudo firewall-cmd --reload
+sudo firewall-cmd --list-ports
