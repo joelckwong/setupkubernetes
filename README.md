@@ -21,11 +21,9 @@ run "kubectl get pods --all-namespaces" and "kubectl get nodes" on master
 
 Install Istio on master
 
-wget https://github.com/istio/istio/releases/download/1.4.3/istio-1.4.3-linux.tar.gz
+curl -L https://istio.io/downloadIstio | sh -
 
-tar -xvf istio-1.4.3-linux.tar.gz
-
-cd istio-1.4.3
+cd istio-1.7.2
 
 export PATH=$PWD/bin:$PATH
 
