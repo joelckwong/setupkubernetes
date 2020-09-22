@@ -57,3 +57,10 @@ kubectl apply -f samples/addons
 
 while ! kubectl wait --for=condition=available --timeout=600s deployment/kiali -n istio-system; do sleep 1; done
 
+sudo yum install xterm xauth
+
+sudo yum -y install firefox
+
+firefox
+
+open http://localhost:20001/kiali in your browser.
