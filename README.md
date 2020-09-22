@@ -38,3 +38,22 @@ kubectl get services
 kubectl get pods
 
 kubectl exec "$(kubectl get pod -l app=ratings -o jsonpath='{.items[0].metadata.name}')" -c ratings -- curl -s productpage:9080/productpage | grep -o "<title>.*</title>"
+
+kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+
+istioctl analyze
+
+export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].nodePort}')
+
+export SECURE_INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
+
+echo "$INGRESS_PORT"
+
+echo "$SECURE_INGRESS_PORT"
+
+http://192.168.0.116:32497/productpage
+
+kubectl apply -f samples/addons
+
+while ! kubectl wait --for=condition=available --timeout=600s deployment/kiali -n istio-system; do sleep 1; done
+
