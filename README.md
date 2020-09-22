@@ -27,9 +27,9 @@ cd istio-1.7.2
 
 export PATH=$PWD/bin:$PATH
 
-cd install/kubernetes
+istioctl install --set profile=demo
 
-perl -pi -e 's/type: LoadBalancer/type: NodePort/' istio-demo.yaml
+kubectl label namespace default istio-injection=enabled
 
 kubectl apply -f istio-demo.yaml
 
