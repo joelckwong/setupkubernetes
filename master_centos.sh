@@ -48,6 +48,8 @@ sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --ignore-preflight-errors=all
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+# https://prefetch.net/blog/2018/02/20/getting-the-flannel-host-gw-working-with-kubernetes/
 wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 sed 's/vxlan/host-gw/' -i kube-flannel.yml
 kubectl apply -f kube-flannel.yml
