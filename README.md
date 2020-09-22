@@ -31,14 +31,10 @@ istioctl install --set profile=demo
 
 kubectl label namespace default istio-injection=enabled
 
-kubectl apply -f istio-demo.yaml
+kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
 
-kubectl -n istio-system get pods
-
-kubectl -n istio-system get service
-
-cd ../..
-
-kubectl apply -f <(istioctl kube-inject -f samples/bookinfo/platform/kube/bookinfo.yaml)
+kubectl get services
 
 kubectl get pods
+
+kubectl exec "$(kubectl get pod -l app=ratings -o jsonpath='{.items[0].metadata.name}')" -c ratings -- curl -s productpage:9080/productpage | grep -o "<title>.*</title>"
