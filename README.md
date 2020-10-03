@@ -23,7 +23,7 @@ Install Istio on master
 
 curl -L https://istio.io/downloadIstio | sh -
 
-cd istio-1.7.2
+cd istio-1.7.3
 
 export PATH=$PWD/bin:$PATH
 
